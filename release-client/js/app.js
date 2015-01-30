@@ -18,6 +18,9 @@ angular.module('app').config(['$routeProvider', function routes($routeProvider) 
     $routeProvider.when('/', {
         templateUrl: '../views/login.html',
         controller: 'app.controllers.LoginController as ctrl'
+    }).when('/chatroom', {
+        templateUrl: '../views/chatroom.html',
+        controller: 'app.controllers.ChatController as ctrl'
     }).otherwise({
         redirectTo: '/'
     });

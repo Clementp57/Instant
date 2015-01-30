@@ -9,9 +9,11 @@ module app.controllers {
     export class LoginController implements IController {
         private socket: any;
         public user: Model.User;
+        private locationService: ng.ILocationService;
 
-        constructor (private $scope: any, private ngSocket) {
+        constructor (private $scope: any, private ngSocket, private $location: ng.ILocationService) {
             this.socket = ngSocket;
+            this.locationService = $location;
             this.init();
         }
 
@@ -53,8 +55,8 @@ module app.controllers {
             $('#' + user.id).remove();
         }
 
-        private welcomeUser(user: Model.User, $location: any) : void {
-            $location.path('chatroom');
+        private welcomeUser(user: Model.User) : void {
+            this.locationService.path('chatroom');
         }
 
         private refuseLogin(): void {

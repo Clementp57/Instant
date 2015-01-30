@@ -7,10 +7,12 @@ var app;
     var controllers;
     (function (controllers) {
         var LoginController = (function () {
-            function LoginController($scope, ngSocket) {
+            function LoginController($scope, ngSocket, $location) {
                 this.$scope = $scope;
                 this.ngSocket = ngSocket;
+                this.$location = $location;
                 this.socket = ngSocket;
+                this.locationService = $location;
                 this.init();
             }
             LoginController.prototype.init = function () {
@@ -58,7 +60,7 @@ var app;
                 $('#' + user.id).remove();
             };
             LoginController.prototype.welcomeUser = function (user) {
-                this.user = user;
+                this.locationService.path('chatroom');
             };
             LoginController.prototype.refuseLogin = function () {
             };
@@ -68,4 +70,4 @@ var app;
     })(controllers = app.controllers || (app.controllers = {}));
 })(app || (app = {}));
 // Remember to pass all the services used by the constructor of the Controller.
-app.registerController('LoginController', ['$scope', 'socket']);
+app.registerController('LoginController', ['$scope', 'socket', '$location']);
