@@ -1,0 +1,31 @@
+{
+  "name": "Instant2",
+  "version": "0.0.0",
+  "authors": [
+    "Clement Peyrabere <clementpeyrabere@me.com>"
+  ],
+  "description": "test",
+  "main": "app.js",
+  "moduleType": [
+    "es6",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "nodejs",
+    "angular",
+    "typescript",
+    "socket.io"
+  ],
+  "license": "MIT",
+  "homepage": "index.html",
+  "devDependencies": {
+    "angular": "~1.3.10",
+    "angular-resource": "~1.3.10",
+    "jquery": "~2.1.3",
+    "angular-route": "~1.3.10",
+    "angular-socket-io": "~0.7.0",
+    "angular-material": "~0.7.0",
+    "ng-socket-io": "~0.2.0"
+  }
+}
