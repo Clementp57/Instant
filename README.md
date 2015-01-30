@@ -1,10 +1,8 @@
-**this project is deprecated and not mantained anymore**
-
-AngularJS and TypeScript super simple project template
+Simple IM stack + client
 ------------------------------------------------------
 
-This is a very simple project template for creating AngularJS applications with TypeScript.
+This project uses a NodeJs server on a TypeScript layer.
 
-`app.ts` contains all the logic that allows to create controllers, filter, directives and services in a *TypeScript*-y way. A sample controller, filter, directive and service are included and being used in a sample view.
+The client is written using Typescript too, and the front End framework AngularJs.
 
-This project is based in [/JakubMrozek/generator-angular-typescript](https://github.com/JakubMrozek/generator-angular-typescript) and uses [/borisyankov/DefinitelyTyped](https://github.com/borisyankov/DefinitelyTyped) for the AngularJS type definitions.
+Client communicates with the server through the socket.io api.
