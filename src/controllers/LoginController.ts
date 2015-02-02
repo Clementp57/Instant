@@ -8,7 +8,6 @@ module app.controllers {
 
     export class LoginController implements IController {
         private socket: any;
-        public user: Model.User;
         private locationService: ng.ILocationService;
 
         constructor (private $scope: any, private ngSocket, private $location: ng.ILocationService) {
@@ -18,19 +17,21 @@ module app.controllers {
         }
 
         private init() : void {
-            $('#loginForm').submit((event) => { this.logUser(event); });
+            $('#loginForm').submit((event) => { this.attemptLogin(event); });
             $('#msgForm').submit((event) => { this.sendMsg(event); });
 
             this.socket.on('newmsg', (message) => { this.outputMessage(message); });
             this.socket.on('newuser', (user) => { this.addUser(user) });
             this.socket.on('login:success', (user) => { this.welcomeUser(user) });
             this.socket.on('login:error', () => { this.refuseLogin() });
+
+            $('#username').focus();
         }
 
-        private logUser(event: JQueryEventObject) : void {
+        private attemptLogin(event: JQueryEventObject) : void {
             event.preventDefault();
             this.socket.emit('login:attempt', {
-                username: $('#username').val(),
+                name: $('#username').val(),
                 password: $('#password').val()
             });
         }

@@ -1,18 +1,25 @@
-<md-content>
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <span class="md-flex">Instant Messenger</span>
+    </div>
+</md-toolbar>
+<md-content id="messageList" style="max-height:300px; ">
     <md-list>
-        <md-item ng-repeat="message in messages">
+        <md-item ng-repeat="message in ctrl.messages">
             <md-item-content>
                 <div class="md-tile-left">
-                    <img ng-src="{{item.face}}" class="face" alt="{{item.who}}">
+                    <img ng-src="http://lorempixel.com/30/30/people" alt="" class="face">
                 </div>
                 <div class="md-tile-content">
-                    <h3>{{item.what}}</h3>
-                    <h4>{{item.who}}</h4>
-                    <p>
-                        {{item.notes}}
-                    </p>
+                    <h3>{{message.user.name}} : {{message.message}}</h3>
                 </div>
             </md-item-content>
+            <md-divider inset></md-divider>
         </md-item>
     </md-list>
 </md-content>
+<form action="" id="msgForm" style="position:absolute;left:0;right:0;bottom:0;">
+    <md-input-container style="padding-bottom: 10px;">
+        <input id="newMsg" name="message" type="text" placeholder="Type a message !"/>
+    </md-input-container>
+</form>

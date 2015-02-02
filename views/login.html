@@ -2,11 +2,11 @@
     <form novalidate action="" id="loginForm" layout="column" layout-margin flex="70">
         <md-input-container>
             <label>Pseudo</label>
-            <input name="login" id="username">
+            <input name="login" id="username" required>
         </md-input-container>
         <md-input-container>
             <label>Password</label>
-            <input type="password" name="password" id="password">
+            <input type="password" name="password" id="password" required>
         </md-input-container>
         <md-button ng-submit class="md-raised md-primary">
             Login

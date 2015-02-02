@@ -18,7 +18,7 @@ var app;
             LoginController.prototype.init = function () {
                 var _this = this;
                 $('#loginForm').submit(function (event) {
-                    _this.logUser(event);
+                    _this.attemptLogin(event);
                 });
                 $('#msgForm').submit(function (event) {
                     _this.sendMsg(event);
@@ -35,11 +35,12 @@ var app;
                 this.socket.on('login:error', function () {
                     _this.refuseLogin();
                 });
+                $('#username').focus();
             };
-            LoginController.prototype.logUser = function (event) {
+            LoginController.prototype.attemptLogin = function (event) {
                 event.preventDefault();
                 this.socket.emit('login:attempt', {
-                    username: $('#username').val(),
+                    name: $('#username').val(),
                     password: $('#password').val()
                 });
             };

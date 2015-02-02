@@ -5,11 +5,12 @@ declare module app.controllers {
     class LoginController implements IController {
         private $scope;
         private ngSocket;
+        private $location;
         private socket;
-        user: Model.User;
-        constructor($scope: any, ngSocket: any);
+        private locationService;
+        constructor($scope: any, ngSocket: any, $location: ng.ILocationService);
         private init();
-        private logUser(event);
+        private attemptLogin(event);
         private sendMsg(event);
         private outputMessage(message);
         private addUser(user);

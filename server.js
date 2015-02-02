@@ -37,22 +37,31 @@ server.listen(app.get('port'), function () {
 });
 var ioServer = io.listen(server);
 var users = {};
+var messages = [];
+var MAX_MESSAGES_BUFFER = 15;
 //Connexion socket
 ioServer.sockets.on('connection', function (socket) {
     //Web socket établie
     var timeStamp = new Date().getTime();
     console.log('[CONNEXION] ' + timeStamp + ' | client IP ' + socket.request.connection.remoteAddress + ' |');
-    var me = false;
+    var me = {};
     for (var k in users) {
         socket.emit('newuser', users[k]);
     }
     socket.on('login:attempt', function (user) {
-        console.info(user);
-        me = user;
+        me.name = user.name;
+        me.ip = socket.request.connection.remoteAddress;
         me.id = guid();
         users[me.id] = me;
         ioServer.sockets.emit('newuser', me);
         socket.emit('login:success', me);
+    });
+    socket.on('request:loggedUser', function () {
+        socket.emit('response:loggedUser', me);
+    });
+    socket.on('request:lastMessages', function () {
+        console.info('Requesting last messages... Sending');
+        socket.emit('response:lastMessages', messages);
     });
     socket.on('disconnect', function (user) {
         if (!me) {
@@ -64,11 +73,11 @@ ioServer.sockets.on('connection', function (socket) {
     });
     socket.on('newmsg', function (message) {
         message.user = me;
-        var date = new Date();
-        message.h = date.getHours();
-        message.m = date.getMinutes();
         message.id = guid();
-        console.info(message);
+        messages.push(message);
+        if (messages.length > MAX_MESSAGES_BUFFER) {
+            messages.shift();
+        }
         ioServer.sockets.emit('newmsg', message);
     });
 });
